@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Design - Banners & Pamphlets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .gallery-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+     <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">I.F.</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html#about" class="text-gray-600 hover:text-blue-600 transition">Home</a>
+                <a href="index.html#skills" class="text-gray-600 hover:text-blue-600 transition">Skills</a>
+                <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition">Projects</a>
+                <a href="index.html#graphics" class="text-gray-600 hover:text-blue-600 transition">Graphics</a>
+                <a href="index.html#experience" class="text-gray-600 hover:text-blue-600 transition">Experience</a>
+                <a href="index.html#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact Me</a>
+            </div>
+            <div class="md:hidden">
+                 <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
+            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-blue-600 transition">Home</a>
+            <a href="index.html#skills" class="block py-2 text-gray-600 hover:text-blue-600 transition">Skills</a>
+            <a href="index.html#projects" class="block py-2 text-gray-600 hover:text-blue-600 transition">Projects</a>
+            <a href="index.html#graphics" class="block py-2 text-gray-600 hover:text-blue-600 transition">Graphics</a>
+            <a href="index.html#experience" class="block py-2 text-gray-600 hover:text-blue-600 transition">Experience</a>
+            <a href="index.html#contact" class="block mt-2 bg-blue-600 text-white px-4 py-2 rounded-full text-center hover:bg-blue-700 transition">Contact Me</a>
+        </div>
+    </header>
+    
+    <div class="container mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold text-center mb-2">Banners & Pamphlets</h1>
+        <p class="text-center text-gray-500 mb-12">A collection of creative designs for events and promotions.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            
+            <img src="Valley_Matthews.jpg" alt="Corporate Banner" class="gallery-img rounded-lg shadow-md">
+            <img src="Traditional_Day.jpg" alt="Conference Banner" class="gallery-img rounded-lg shadow-md">            
+            <img src="Myron_Banner.png" alt="Event Poster" class="gallery-img rounded-lg shadow-md">
+
+            <img src="page-1.jpg" alt="Corporate Banner" class="gallery-img rounded-lg shadow-md">
+            <img src="page-2.jpg" alt="Conference Banner" class="gallery-img rounded-lg shadow-md">            
+            <img src="page-3.jpg" alt="Event Poster" class="gallery-img rounded-lg shadow-md">
+            
+            <img src="Thomas_Pereira_Background.jpg" alt="Music Flyer" class="gallery-img rounded-lg shadow-md">
+            <img src="BannerEGI.jpg" alt="Sale Poster" class="gallery-img rounded-lg shadow-md">
+            <img src="GARDENING.jpg" alt="Sale Poster" class="gallery-img rounded-lg shadow-md">
+
+
+
+            <img src="BannerR.jpg" alt="Art Exhibition Pamphlet" class="gallery-img rounded-lg shadow-md">
+            <img src="BannerADMA.jpg" alt="Art Exhibition Pamphlet" class="gallery-img rounded-lg shadow-md">
+            <img src="Banner02.jpg" alt="Art Exhibition Pamphlet" class="gallery-img rounded-lg shadow-md">
+        </div>
+        <div class="text-center mt-12">
+            <a href="index.html" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">&larr; Back to Portfolio</a>
+        </div>
+    </div>
+</body>
+</html>
