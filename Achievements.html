@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Achievement Showcase</title>
+    <!-- Use a modern font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            color: #1a202c;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .dark body {
+            background-color: #1a202c;
+            color: #f7f9fb;
+        }
+        .dark .bg-white {
+            background-color: #2d3748;
+        }
+        .dark .text-gray-900 {
+            color: #f7fafc;
+        }
+        .dark .border-gray-200 {
+            border-color: #4a5568;
+        }
+        /* Custom animation for fade in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-400">I.F.</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html#about" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+                <a href="index.html#skills" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Skills</a>
+                <a href="index.html#projects" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
+                <a href="index.html#graphics" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Graphics</a>
+                <a href="index.html#experience" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
+                <a href="index.html#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact Me</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 dark:text-gray-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
+            <a href="index.html#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+            <a href="index.html#skills" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Skills</a>
+            <a href="index.html#projects" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
+            <a href="index.html#graphics" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Graphics</a>
+            <a href="index.html#experience" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
+            <a href="index.html#contact" class="block mt-2 bg-blue-600 text-white px-4 py-2 rounded-full text-center hover:bg-blue-700 transition">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area with Achievement Showcase -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-8 my-8">
+        <h1 class="text-3xl font-extrabold text-center mb-8">My Achievements</h1>
+        <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            Browse my accomplishments by category. Each section showcases a different type of recognition I've received.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Certificates Card -->
+            <a href="Certificates.html" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900 duration-200">
+                <span class="text-5xl mb-4 block">🏆</span>
+                <h2 class="text-xl font-bold mb-2">Certificates</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Formal recognition for courses, training, and programs.</p>
+            </a>
+
+            <!-- Badges Card -->
+            <a href="Badges.html" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900 duration-200">
+                <span class="text-5xl mb-4 block">🎖</span>
+                <h2 class="text-xl font-bold mb-2">Badges</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Digital badges and credentials for specific skills or modules.</p>
+            </a>
+
+            <!-- Trophies Card -->
+            <a href="Trophies.html" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900 duration-200">
+                <span class="text-5xl mb-4 block">🥇</span>
+                <h2 class="text-xl font-bold mb-2">Trophies</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Awards and special recognition for completing collections of work.</p>
+            </a>
+
+            <!-- Medals Card -->
+            <a href="Medals.html" class="block bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900 duration-200">
+                <span class="text-5xl mb-4 block">🏅</span>
+                <h2 class="text-xl font-bold mb-2">Medals</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Honors and distinctions for significant achievements.</p>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white dark:bg-gray-900 py-12 mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                <!-- Tagline -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Tagline</h3>
+                    <p class="text-gray-400 italic">"Innovating Today for a Greener Tomorrow"</p>
+                </div>
+                <!-- Tech Projects -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Tech Projects</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="https://youtu.be/Me7ZiXznl74" target="_blank" class="hover:text-white transition">Smart Agriculture System</a></li>
+                        <li><a href="https://youtu.be/XOCjPsALTcM" target="_blank" class="hover:text-white transition">EcoFreak Chatbot</a></li>
+                        <li><a href="https://youtu.be/K0QIOYJ3B9o" target="_blank" class="hover:text-white transition">AI Plant Disease Detection</a></li>
+                        <li><a href="#" class="hover:text-white transition">Project Page</a></li>
+                    </ul>
+                </div>
+                <!-- Achievements -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Achievements</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>🏆 Certificates</li>
+                        <li>🎖 Badges</li>
+                        <li>🥇 Trophies</li>
+                        <li>🏅 Medals</li>
+                    </ul>
+                </div>
+                <!-- About / Policy -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">About & Policies</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Me</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-6 mt-8">
+                <a href="https://www.youtube.com/@I.M.A.G.E." target="_blank" class="text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube">
+                        <path d="M2.5 17a24.12 24.12 0 0 1 0-10C2.5 4.24 4.24 2.5 7 2.5h10c2.76 0 4.5 1.74 4.5 4.5v10c0 2.76-1.74 4.5-4.5 4.5H7c-2.76 0-4.5-1.74-4.5-4.5Z"/>
+                        <path d="m10 15 5-3-5-3z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/Immanuel-Fernandes" target="_blank" class="text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                        <path d="M9 18c-4.51 2-5-2-7-2"/>
+                    </svg>
+                </a>
+                <a href="mailto:immanuelfernandes369@gmail.com" class="text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/immanuel-fernandes" target="_blank" class="text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect width="4" height="12" x="2" y="9"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/917738754547" target="_blank" class="text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.35 12.35 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.35 12.35 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </a>
+            </div>
+            <!-- Copyright -->
+            <p class="text-gray-500 text-center mt-4">&copy; 2025 Immanuel Fernandes. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Use a self-contained anonymous function to avoid global scope pollution
+        (function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
