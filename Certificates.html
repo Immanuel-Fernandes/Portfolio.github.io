@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Achievement Showcase</title>
-    <!-- Use a modern font -->
+    <title>Certificates | Immanuel Fernandes</title>
+    <link rel="icon" href="Assets/Site/resume-icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -20,444 +19,362 @@
             display: flex;
             flex-direction: column;
         }
-        .dark body {
-            background-color: #1a202c;
-            color: #f7f9fb;
-        }
-        .dark .bg-white {
-            background-color: #2d3748;
-        }
-        .dark .text-gray-900 {
-            color: #f7fafc;
-        }
-        .dark .border-gray-200 {
-            border-color: #4a5568;
-        }
-        .dark .bg-gray-200 {
-            background-color: #4a5568;
-        }
-        .dark .text-gray-800 {
-            color: #f7fafc;
-        }
-        .dark .bg-gray-700 {
-            background-color: #2d3748;
-        }
-        .dark .text-gray-700 {
-            color: #e2e8f0;
-        }
-        /* Custom animation for fade in */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        .delay-200 { animation-delay: 0.2s; }
-
-        /* Ensure images maintain a 16:9 aspect ratio */
-        .achievement-image-container {
-            position: relative;
+        .dark body { background-color: #1a202c; color: #f7f9fb; }
+        .filter-chip { transition: all 0.2s ease; cursor: pointer; user-select: none; }
+        .filter-chip:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+        .filter-chip:active { transform: translateY(0); }
+        .filter-chip:disabled { cursor: not-allowed; }
+        .filter-chip:disabled:hover { transform: none; box-shadow: none; }
+        .cert-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -6px rgba(37, 99, 235, 0.25); }
+        .cert-image {
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            object-fit: contain;
+            background: #eef1f6;
+            display: block;
         }
-        .achievement-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .portrait { aspect-ratio: 210 / 297; }
+        .landscape { aspect-ratio: 297 / 210; }
+        /* lightbox */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(15, 23, 42, 0.92);
+            display: none; align-items: center; justify-content: center;
+            flex-direction: column; padding: 24px;
         }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 95%; max-height: 80vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border-radius: 8px; background: #fff; }
+        .lightbox .lb-caption { color: #e2e8f0; margin-top: 16px; text-align: center; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
-
+<body class="bg-gray-50">
     <!-- Header & Navigation -->
-    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-400">I.F.</a>
+            <a href="index.html" class="text-2xl font-bold text-blue-600">I.F.</a>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="index.html#about" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
-                <a href="index.html#skills" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Skills</a>
-                <a href="index.html#projects" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
-                <a href="index.html#graphics" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Graphics</a>
-                <a href="index.html#experience" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
+                <a href="index.html#about" class="text-gray-600 hover:text-blue-600 transition">Home</a>
+                <a href="Skills.html" class="text-gray-600 hover:text-blue-600 transition">Skills</a>
+                <a href="index.html#projects" class="text-gray-600 hover:text-blue-600 transition">Projects</a>
+                <a href="index.html#graphics" class="text-gray-600 hover:text-blue-600 transition">Graphics</a>
+                <a href="index.html#experience" class="text-gray-600 hover:text-blue-600 transition">Experience</a>
                 <a href="index.html#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact Me</a>
             </div>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-600 dark:text-gray-300 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
-            <a href="index.html#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
-            <a href="index.html#skills" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Skills</a>
-            <a href="index.html#projects" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
-            <a href="index.html#graphics" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Graphics</a>
-            <a href="index.html#experience" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
+            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-blue-600 transition">Home</a>
+            <a href="Skills.html" class="block py-2 text-gray-600 hover:text-blue-600 transition">Skills</a>
+            <a href="index.html#projects" class="block py-2 text-gray-600 hover:text-blue-600 transition">Projects</a>
+            <a href="index.html#graphics" class="block py-2 text-gray-600 hover:text-blue-600 transition">Graphics</a>
+            <a href="index.html#experience" class="block py-2 text-gray-600 hover:text-blue-600 transition">Experience</a>
             <a href="index.html#contact" class="block mt-2 bg-blue-600 text-white px-4 py-2 rounded-full text-center hover:bg-blue-700 transition">Contact Me</a>
         </div>
     </header>
 
-    <!-- Main Content Area with Achievement Showcase -->
-    <main id="app" class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-8 my-8">
-        <!-- Main content will be rendered by JavaScript -->
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-12">
+        <div class="container mx-auto px-6">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Certificates &amp; Credentials</h1>
+            <p class="text-blue-100 max-w-2xl">Courses, programs, workshops and achievements completed by Immanuel Fernandes across platforms including IBM SkillsBuild, Microsoft Learn, Udemy, Canva, Great Learning and more.</p>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-8 my-8">
+        <!-- Filters -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6 mb-8 space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="relative">
+                    <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 1 1-12 0 6 6 0 0 1 12 0z"></path></svg>
+                    <input id="search-input" type="text" placeholder="Search certificates..." class="w-full sm:w-80 pl-11 pr-4 py-2.5 rounded-full border border-gray-300 bg-gray-50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition">
+                </div>
+                <div class="flex items-center gap-2">
+                    <label for="sort-select" class="text-sm font-medium text-gray-600 whitespace-nowrap">Sort by:</label>
+                    <div class="relative">
+                        <select id="sort-select" class="appearance-none pl-4 pr-9 py-2.5 rounded-full border border-gray-300 bg-gray-50 text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer">
+                            <option value="default">Default</option>
+                            <option value="date">Date</option>
+                            <option value="org">Organisation</option>
+                        </select>
+                        <svg class="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                        Category
+                    </p>
+                    <div class="relative">
+                        <select id="cat-select" class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-full border border-gray-300 bg-gray-50 text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"></select>
+                        <svg class="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 11h.01M15 11h.01M9 15h.01M15 15h.01"></path></svg>
+                        Organisation
+                    </p>
+                    <div class="relative">
+                        <select id="org-select" class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-full border border-gray-300 bg-gray-50 text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"></select>
+                        <svg class="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 6h-15A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h15a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 19.5 6zM3 10h18"></path></svg>
+                        Orientation
+                    </p>
+                    <div id="orient-filters" class="flex flex-wrap gap-1.5"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+                <p id="result-count" class="text-sm text-gray-500"></p>
+                <button id="clear-filters" class="hidden text-sm font-semibold text-blue-600 hover:text-blue-800 transition">Clear filters</button>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div id="cert-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        <div id="no-results" class="hidden text-center py-20">
+            <p class="text-5xl mb-4">🔍</p>
+            <p class="text-lg text-gray-500 font-medium">No certificates found</p>
+            <p class="text-sm text-gray-400 mt-1">Try a different search or clear the filters.</p>
+        </div>
     </main>
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <img id="lb-image" src="" alt="">
+        <div id="lb-caption" class="lb-caption"></div>
+        <button id="lb-close" class="mt-4 px-6 py-2 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-200 transition">Close</button>
+    </div>
+
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white dark:bg-gray-900 py-12 mt-auto">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-                <!-- Tagline -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">Tagline</h3>
-                    <p class="text-gray-400 italic">"Innovating Today for a Greener Tomorrow"</p>
-                </div>
-                <!-- Tech Projects -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">Tech Projects</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="https://youtu.be/Me7ZiXznl74" target="_blank" class="hover:text-white transition">Smart Agriculture System</a></li>
-                        <li><a href="https://youtu.be/XOCjPsALTcM" target="_blank" class="hover:text-white transition">EcoFreak Chatbot</a></li>
-                        <li><a href="https://youtu.be/K0QIOYJ3B9o" target="_blank" class="hover:text-white transition">AI Plant Disease Detection</a></li>
-                        <li><a href="#" class="hover:text-white transition">Project Page</a></li>
-                    </ul>
-                </div>
-                <!-- Achievements -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">Achievements</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>🏆 Certificates</li>
-                        <li>🎖 Badges</li>
-                        <li>🥇 Trophies</li>
-                        <li>🏅 Medals</li>
-                    </ul>
-                </div>
-                <!-- About / Policy -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">About & Policies</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">About Me</a></li>
-                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-4">&copy; 2026 Immanuel Fernandes. All Rights Reserved.</p>
+            <div class="flex justify-center space-x-5">
+                <a href="https://github.com/Immanuel-Fernandes" target="_blank" class="text-gray-400 hover:text-white transition">GitHub</a>
+                <a href="https://www.linkedin.com/in/immanuel-fernandes" target="_blank" class="text-gray-400 hover:text-white transition">LinkedIn</a>
+                <a href="mailto:immanuelfernandes369@gmail.com" class="text-gray-400 hover:text-white transition">Email</a>
+                <a href="Resume_Immanuel_Fernandes.pdf" class="text-gray-400 hover:text-white transition">Resume</a>
             </div>
-            <!-- Social Icons -->
-            <div class="flex justify-center space-x-6 mt-8">
-                <a href="https://www.youtube.com/@I.M.A.G.E." target="_blank" class="text-white hover:text-blue-200 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube">
-                        <path d="M2.5 17a24.12 24.12 0 0 1 0-10C2.5 4.24 4.24 2.5 7 2.5h10c2.76 0 4.5 1.74 4.5 4.5v10c0 2.76-1.74 4.5-4.5 4.5H7c-2.76 0-4.5-1.74-4.5-4.5Z"/>
-                        <path d="m10 15 5-3-5-3z"/>
-                    </svg>
-                </a>
-                <a href="https://github.com/Immanuel-Fernandes" target="_blank" class="text-white hover:text-blue-200 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github">
-                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
-                        <path d="M9 18c-4.51 2-5-2-7-2"/>
-                    </svg>
-                </a>
-                <a href="mailto:immanuelfernandes369@gmail.com" class="text-white hover:text-blue-200 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
-                        <rect width="20" height="16" x="2" y="4" rx="2"/>
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                    </svg>
-                </a>
-                <a href="https://www.linkedin.com/in/immanuel-fernandes" target="_blank" class="text-white hover:text-blue-200 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
-                        <rect width="4" height="12" x="2" y="9"/>
-                        <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                </a>
-                <a href="https://wa.me/917738754547" target="_blank" class="text-white hover:text-blue-200 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.35 12.35 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.35 12.35 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
-                </a>
-            </div>
-            <!-- Copyright -->
-            <p class="text-gray-500 text-center mt-4">&copy; 2025 Immanuel Fernandes. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <script src="Assets/certificates-data.js"></script>
     <script>
-        // Use a self-contained anonymous function to avoid global scope pollution
-        (function() {
-            // =========================
-            // Mobile Menu and Smooth Scroll
-            // =========================
+        (function () {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            
             if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
+
+            const chipActive = 'filter-chip px-3 py-1.5 rounded-full text-sm font-medium bg-blue-600 text-white shadow-sm';
+            const chipIdle = 'filter-chip px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-700 border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200';
+            const chipDisabled = 'filter-chip px-3 py-1.5 rounded-full text-sm font-medium bg-gray-200 text-gray-400 border border-gray-200 opacity-50 cursor-not-allowed';
+            const data = CERTIFICATES_DATA.filter(d => d.org !== 'Microsoft' && d.org !== 'Microsoft Learn');
+            const grid = document.getElementById('cert-grid');
+            const noResults = document.getElementById('no-results');
+            const searchInput = document.getElementById('search-input');
+            const resultCount = document.getElementById('result-count');
+
+            const state = { search: '', orient: 'All', cat: 'All', org: 'All', sort: 'default' };
+
+            function buildPills(containerId, values, key, makeLabel) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                const all = document.createElement('button');
+                all.textContent = 'All';
+                all.className = chipActive;
+                container.appendChild(all);
+                values.forEach(v => {
+                    const b = document.createElement('button');
+                    b.textContent = makeLabel ? makeLabel(v) : v;
+                    b.dataset.value = v;
+                    b.className = chipIdle;
+                    container.appendChild(b);
+                });
+                container.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        state[key] = btn.textContent === 'All' ? 'All'
+                            : (makeLabel ? btn.dataset.value : btn.dataset.value);
+                        render();
+                        refreshChips();
+                    });
                 });
             }
 
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
+            function buildSelect(selectId, values, key) {
+                const sel = document.getElementById(selectId);
+                const allOpt = document.createElement('option');
+                allOpt.value = 'All';
+                allOpt.textContent = 'All';
+                sel.appendChild(allOpt);
+                values.forEach(v => {
+                    const o = document.createElement('option');
+                    o.value = v;
+                    o.textContent = v;
+                    sel.appendChild(o);
                 });
-            });
+                sel.addEventListener('change', () => { state[key] = sel.value; render(); refreshChips(); });
+            }
 
-            // =========================
-            // 1. Data Storage
-            // =========================
-            const achievementsData = [
-                { Type: 'Badge', image: 'images/AchievementBadge/Build effective bots with Power Virtual Agents.jpg', caption: 'Build effective bots with Power Virtual Agents', organization: 'Microsoft', year: '2023', field: 'Power Platform', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/3FVXKDDH?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Enhance Power Virtual Agents bots.jpg', caption: 'Enhance Power Virtual Agents bots', organization: 'Microsoft', year: '2023', field: 'Power Platform', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/JGXYZDDT?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Work with entities and variables in Power Virtual Agents.jpg', caption: 'Work with entities and variables in Power Virtual Agents', organization: 'Microsoft', year: '2023', field: 'Power Platform', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/HXJKQGZ8?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Manage topics in Power Virtual Agents.jpg', caption: 'Manage topics in Power Virtual Agents', organization: 'Microsoft', year: '2023', field: 'Power Platform', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/7QC4CH4Z?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Get started with Power Virtual Agents bots.jpg', caption: 'Get started with Power Virtual Agents bots', organization: 'Microsoft', year: '2023', field: 'Power Platform', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/B5AFSL4D?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Use text generation in AI Builder.jpg', caption: 'Use text generation in AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/ED68ARTP?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Manage models in AI Builder.jpg', caption: 'Manage models in AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/F7SZSEHX?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Get started with AI Builder.jpg', caption: 'Get started with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/B5XJAEZD?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Process receipts with AI Builder.jpg', caption: 'Process receipts with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/9W7QVWSU?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Use AI Builder in Power Automate.jpg', caption: 'Use AI Builder in Power Automate', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/UNZVTUN3?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Identify key phrases with AI Builder.jpg', caption: 'Identify key phrases with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/WRDA56FN?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Identify the language of text with AI Builder.jpg', caption: 'Identify the language of text with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/AMGPZJW7?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Detect objects with AI Builder.jpg', caption: 'Detect objects with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/WRDVFC9N?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Extract information from business cards with AI Builder.jpg', caption: 'Extract information from business cards with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/2P9E8TCV?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Analyze the sentiment of text with AI Builder.jpg', caption: 'Analyze the sentiment of text with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/8YBMFXHW?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Recognize text with AI Builder.jpg', caption: 'Recognize text with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/JGRWWKDT?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Process custom documents with AI Builder.jpg', caption: 'Process custom documents with AI Builder', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/HX6NJVH8?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Introduction to GitHub Copilot.jpg', caption: 'Introduction to GitHub Copilot', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/FRA56PCX?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Get started with AI on Azure.jpg', caption: 'Get started with AI on Azure', organization: 'Microsoft', year: '2023', field: 'AI', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/BSMWKA9D?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Introduction to .NET.jpg', caption: 'Introduction to .NET', organization: 'Microsoft', year: '2023', field: 'Development', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/FRVWEVZX?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Write your first C# code.jpg', caption: 'Write your first C# code', organization: 'Microsoft', year: '2023', field: 'Development', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/3WRSA6BH?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Describe cloud service types.jpg', caption: 'Describe cloud service types', organization: 'Microsoft', year: '2023', field: 'Cloud', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/3N7URV2H?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Describe the benefits of using cloud services.jpg', caption: 'Describe the benefits of using cloud services', organization: 'Microsoft', year: '2023', field: 'Cloud', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/HFAHXVQ8?sharingId=8D57326DD8BEA650' },
-                { Type: 'Badge', image: 'images/AchievementBadge/Describe cloud computing.jpg', caption: 'Describe cloud computing', organization: 'Microsoft', year: '2023', field: 'Cloud', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/UWAWZ5C3?sharingId=8D57326DD8BEA650' },
-                { Type: 'Trophy', image: 'images/AchievementTrophy/Create bots with Power Virtual Agents.jpg', caption: 'Create bots with Power Virtual Agents', organization: 'Microsoft', year: '2023', field: 'Chatbots', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/EDX8E4EP?sharingId=8D57326DD8BEA650' },
-                { Type: 'Trophy', image: 'images/AchievementTrophy/Bring AI to your business with AI Builder.jpg', caption: 'Bring AI to your business with AI Builder', organization: 'Microsoft', year: '2023', field: 'Artificial intelligence Business applications', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/AMDAP4T7?sharingId=8D57326DD8BEA650' },
-                { Type: 'Trophy', image: 'images/AchievementTrophy/Improve business performance with AI Builder.jpg', caption: 'Improve business performance with AI Builder', organization: 'Microsoft', year: '2023', field: 'Artificial intelligence', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/4TNXTB9K?sharingId=8D57326DD8BEA650' },
-                { Type: 'Trophy', image: 'images/AchievementTrophy/Microsoft Azure Fundamentals: Describe cloud concepts.jpg', caption: 'Microsoft Azure Fundamentals: Describe cloud concepts', organization: 'Microsoft', year: '2023', field: 'Architecture Cloud computing Technical infrastructure', url: 'https://learn.microsoft.com/api/achievements/share/en-us/ImmanuelFernandes-1487/F7R9U57X?sharingId=8D57326DD8BEA650' }
-            ];
+            const orgs = [...new Set(data.map(d => d.org))].sort((a, b) => a.localeCompare(b));
+            const cats = [...new Set(data.map(d => d.category))].sort((a, b) => a.localeCompare(b));
+            const orients = ['Landscape', 'Portrait'];
 
-            // =========================
-            // 2. DOM Elements
-            // =========================
-            const app = document.getElementById('app');
-            const filterButtonsContainer = document.createElement('div');
-            filterButtonsContainer.id = 'filter-buttons';
-            filterButtonsContainer.className = 'flex flex-wrap justify-center sm:justify-start gap-2';
+            buildSelect('org-select', orgs, 'org');
+            buildSelect('cat-select', cats, 'cat');
+            buildPills('orient-filters', orients, 'orient');
 
-            const searchInput = document.createElement('input');
-            searchInput.id = 'search-input';
-            searchInput.type = 'text';
-            searchInput.placeholder = 'Search achievements...';
-            searchInput.className = 'w-full sm:w-64 pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500';
+            function makeCard(d) {
+                const el = document.createElement('div');
+                el.className = 'cert-card bg-white rounded-lg shadow overflow-hidden cursor-pointer fade-in';
+                el.innerHTML = `
+                    <div class="${d.orient === 'Portrait' ? 'portrait' : 'landscape'} w-full overflow-hidden">
+                        <img loading="lazy" src="${d.path}" alt="${d.title.replace(/"/g, '&quot;')}" class="cert-image" onerror="this.src='https://placehold.co/600x424/1f2937/e5e7eb?text=Certificate';">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-sm font-semibold text-gray-900 leading-tight mb-1">${d.title}</h3>
+                        <p class="text-xs text-gray-500 mb-1">${d.org}</p>
+                        <div class="flex flex-wrap gap-1.5 items-center">
+                            ${d.date ? '<span class="text-xs text-gray-400">' + d.date + '</span>' : ''}
+                            <span class="text-xs rounded-full px-2 py-0.5 bg-gray-100 text-gray-600 border border-gray-200">${d.category}</span>
+                        </div>
+                    </div>`;
+                el.addEventListener('click', () => openLightbox(d));
+                return el;
+            }
 
-            const achievementsContainer = document.createElement('div');
-            achievementsContainer.id = 'achievements-container';
-            achievementsContainer.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
-
-            const noResultsMessage = document.createElement('p');
-            noResultsMessage.id = 'no-results-message';
-            noResultsMessage.className = 'hidden text-center text-lg text-gray-500 dark:text-gray-400';
-            noResultsMessage.textContent = 'No achievements found for the current filter and search term.';
-
-            // =========================
-            // 3. State Management and Functions
-            // =========================
-            let currentFilter = 'All';
-
-            const getPlaceholderImage = (text) => {
-                const words = text.split(' ');
-                const textParam = words.slice(0, 3).join('%20');
-                const backgroundColor = '1f2937';
-                const textColor = 'e5e7eb';
-                return `https://placehold.co/1600x900/${backgroundColor}/${textColor}?text=${textParam}`;
-            };
-
-            const createAchievementCard = (achievement) => {
-                const card = document.createElement('div');
-                card.className = 'achievement-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 duration-200 ease-in-out';
-
-                const cardLink = document.createElement('a');
-                cardLink.href = achievement.url;
-                cardLink.target = '_blank';
-                cardLink.rel = 'noopener noreferrer';
-                cardLink.className = 'block';
-
-                const imageContainer = document.createElement('div');
-                imageContainer.className = 'achievement-image-container';
-                
-                const img = document.createElement('img');
-                img.src = getPlaceholderImage(achievement.caption);
-                img.alt = achievement.caption;
-                img.className = 'achievement-image rounded-t-lg border-b-2 border-blue-500';
-
-                const textContent = document.createElement('div');
-                textContent.className = 'p-4';
-
-                const title = document.createElement('h3');
-                title.className = 'text-sm md:text-base font-semibold text-gray-900 dark:text-white mb-2 leading-tight';
-                title.textContent = achievement.caption;
-
-                const org = document.createElement('p');
-                org.className = 'text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-1';
-                org.innerHTML = `<span class="font-medium text-gray-700 dark:text-gray-300">Issued by:</span> ${achievement.organization}`;
-
-                const year = document.createElement('p');
-                year.className = 'text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-1';
-                year.innerHTML = `<span class="font-medium text-gray-700 dark:text-gray-300">Year:</span> ${achievement.year}`;
-
-                const field = document.createElement('p');
-                field.className = 'text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3';
-                field.innerHTML = `<span class="font-medium text-gray-700 dark:text-gray-300">Field:</span> ${achievement.field}`;
-
-                const verifyButton = document.createElement('span');
-                verifyButton.className = 'inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm font-medium rounded-full transition-colors duration-200 ease-in-out shadow-md';
-                verifyButton.textContent = 'Verify';
-
-                const externalLinkIcon = document.createElement('div');
-                externalLinkIcon.className = 'ml-2';
-                externalLinkIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
-
-                verifyButton.appendChild(externalLinkIcon);
-                
-                textContent.appendChild(title);
-                textContent.appendChild(org);
-                textContent.appendChild(year);
-                textContent.appendChild(field);
-                textContent.appendChild(verifyButton);
-
-                cardLink.appendChild(imageContainer);
-                imageContainer.appendChild(img);
-                cardLink.appendChild(textContent);
-
-                card.appendChild(cardLink);
-
-                return card;
-            };
-
-            const renderAchievements = (data) => {
-                achievementsContainer.innerHTML = '';
-                if (data.length === 0) {
-                    noResultsMessage.classList.remove('hidden');
-                } else {
-                    noResultsMessage.classList.add('hidden');
-                    data.forEach(achievement => {
-                        achievementsContainer.appendChild(createAchievementCard(achievement));
+            const MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+            function parseDate(str) {
+                if (!str) return null;
+                const s = String(str);
+                let m = /(\d{1,2})\s+([A-Za-z]{3}).?\s+(\d{4})/.exec(s);
+                if (m) return new Date(+m[3], MONTHS[m[2].toLowerCase().slice(0, 3)], +m[1]).getTime();
+                m = /([A-Za-z]{3}).?\s+(\d{4})/.exec(s);
+                if (m) return new Date(+m[2], MONTHS[m[1].toLowerCase().slice(0, 3)], 15).getTime();
+                return null;
+            }
+            function countMatch(overrides) {
+                const o = Object.assign({}, state, overrides);
+                const q = o.search.toLowerCase();
+                return data.filter(d => {
+                    if (o.orient !== 'All' && d.orient !== o.orient) return false;
+                    if (o.cat !== 'All' && d.category !== o.cat) return false;
+                    if (o.org !== 'All' && d.org !== o.org) return false;
+                    if (q && !(d.title.toLowerCase().includes(q) || d.org.toLowerCase().includes(q) || d.category.toLowerCase().includes(q))) return false;
+                    return true;
+                }).length;
+            }
+            function refreshChips() {
+                [
+                    { sel: document.getElementById('cat-select'), key: 'cat' },
+                    { sel: document.getElementById('org-select'), key: 'org' }
+                ].forEach(({ sel, key }) => {
+                    Array.from(sel.options).forEach(opt => {
+                        if (state[key] === opt.value) { opt.disabled = false; return; }
+                        opt.disabled = countMatch({ [key]: opt.value }) === 0;
                     });
+                });
+                document.getElementById('orient-filters').querySelectorAll('button').forEach(chip => {
+                    const value = chip.textContent === 'All' ? 'All' : chip.dataset.value;
+                    const isActive = state.orient === value;
+                    if (isActive) {
+                        chip.disabled = false;
+                        chip.className = chipActive;
+                        return;
+                    }
+                    const viable = countMatch({ orient: value }) > 0;
+                    chip.disabled = !viable;
+                    chip.className = viable ? chipIdle : chipDisabled;
+                });
+            }
+
+            function sortCertificates(list) {
+                const arr = list.slice();
+                if (state.sort === 'date') {
+                    arr.sort((a, b) => (parseDate(b.date) || 0) - (parseDate(a.date) || 0));
+                } else if (state.sort === 'org') {
+                    arr.sort((a, b) => a.org.localeCompare(b.org) || a.title.localeCompare(b.title));
+                } else if (state.orient === 'All') {
+                    arr.sort((a, b) => (a.orient === 'Portrait') - (b.orient === 'Portrait'));
                 }
-            };
-
-            const updateFilterButtons = () => {
-                document.querySelectorAll('#filter-buttons button').forEach(btn => {
-                    if (btn.textContent === currentFilter) {
-                        btn.className = 'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-in-out bg-blue-600 text-white shadow-md';
-                    } else {
-                        btn.className = 'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-in-out bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-blue-200 dark:hover:bg-blue-800';
-                    }
-                });
-            };
-
-            const setupFilters = () => {
-                const allFields = achievementsData.map(item => item.field);
-                const uniqueFields = ['All', ...new Set(allFields)];
-
-                filterButtonsContainer.innerHTML = '';
-                uniqueFields.forEach(field => {
-                    const button = document.createElement('button');
-                    button.textContent = field;
-                    button.addEventListener('click', () => {
-                        currentFilter = field;
-                        searchInput.value = '';
-                        updateAchievements();
-                        updateFilterButtons();
-                    });
-                    filterButtonsContainer.appendChild(button);
-                });
-                updateFilterButtons();
-            };
-
-            const updateAchievements = () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                const filteredData = achievementsData.filter(item => {
-                    const matchesFilter = currentFilter === 'All' || item.field.includes(currentFilter);
-                    const matchesSearch = item.caption.toLowerCase().includes(searchTerm) || item.field.toLowerCase().includes(searchTerm);
-                    return matchesFilter && matchesSearch;
-                });
-                renderAchievements(filteredData);
-            };
-
-            // =========================
-            // 4. Initialization
-            // =========================
-            function initializeApp() {
-                // Clear the main app container
-                app.innerHTML = '';
-
-                // Create the header section for the app
-                const appHeader = document.createElement('div');
-                appHeader.className = 'flex flex-col sm:flex-row items-center justify-between mb-8 space-y-4 sm:space-y-0 sm:space-x-4';
-                
-                // Add filter buttons
-                appHeader.appendChild(filterButtonsContainer);
-
-                // Add search bar
-                const searchContainer = document.createElement('div');
-                searchContainer.className = 'relative w-full sm:w-auto';
-                const searchIcon = document.createElement('div');
-                searchIcon.className = 'absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400';
-                searchIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>';
-                searchContainer.appendChild(searchInput);
-                searchContainer.appendChild(searchIcon);
-                appHeader.appendChild(searchContainer);
-
-                // Append the header to the app
-                app.appendChild(appHeader);
-                
-                // Append the main achievements container and no results message
-                app.appendChild(achievementsContainer);
-                app.appendChild(noResultsMessage);
-
-                // Event listener for the search bar
-                searchInput.addEventListener('input', updateAchievements);
-
-                // Setup initial state
-                setupFilters();
-                updateAchievements();
+                return arr;
             }
 
-            document.addEventListener('DOMContentLoaded', () => {
-                // Smooth scroll for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href').substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                            mobileMenu.classList.add('hidden');
-                        }
-                    });
+            function render() {
+                const q = state.search.toLowerCase();
+                const filtered = data.filter(d => {
+                    if (state.orient !== 'All' && d.orient !== state.orient) return false;
+                    if (state.cat !== 'All' && d.category !== state.cat) return false;
+                    if (state.org !== 'All' && d.org !== state.org) return false;
+                    if (q && !(d.title.toLowerCase().includes(q) || d.org.toLowerCase().includes(q) || d.category.toLowerCase().includes(q))) return false;
+                    return true;
                 });
+                const ordered = sortCertificates(filtered);
+                grid.innerHTML = '';
+                ordered.forEach(d => grid.appendChild(makeCard(d)));
+                noResults.classList.toggle('hidden', ordered.length !== 0);
+                resultCount.textContent = ordered.length + ' of ' + data.length + ' certificates';
+                clearBtn.classList.toggle('hidden', !(q || state.orient !== 'All' || state.cat !== 'All' || state.org !== 'All' || state.sort !== 'default'));
+            }
 
-                // Initialize the app content
-                initializeApp();
+            searchInput.addEventListener('input', () => { state.search = searchInput.value; render(); refreshChips(); });
+
+            const sortSelect = document.getElementById('sort-select');
+            sortSelect.addEventListener('change', () => { state.sort = sortSelect.value; render(); });
+
+            const clearBtn = document.getElementById('clear-filters');
+            clearBtn.addEventListener('click', () => {
+                state.search = '';
+                state.orient = 'All';
+                state.cat = 'All';
+                state.org = 'All';
+                state.sort = 'default';
+                searchInput.value = '';
+                sortSelect.value = 'default';
+                document.getElementById('cat-select').value = 'All';
+                document.getElementById('org-select').value = 'All';
+                ['cat-select', 'org-select'].forEach(id => {
+                    Array.from(document.getElementById(id).options).forEach(o => { o.disabled = false; });
+                });
+                document.getElementById('orient-filters').querySelectorAll('button').forEach(x => {
+                    x.className = x.textContent === 'All' ? chipActive : chipIdle;
+                    x.disabled = false;
+                });
+                render();
+                refreshChips();
             });
+
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lbImage = document.getElementById('lb-image');
+            const lbCaption = document.getElementById('lb-caption');
+            function openLightbox(d) {
+                lbImage.src = d.path;
+                lbImage.alt = d.title;
+                lbCaption.textContent = d.title + ' \u2014 ' + d.org + (d.date ? ' (' + d.date + ')' : '');
+                lightbox.classList.add('open');
+            }
+            document.getElementById('lb-close').addEventListener('click', () => lightbox.classList.remove('open'));
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+
+            render();
+            refreshChips();
         })();
     </script>
 </body>

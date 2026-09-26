@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Skills &amp; Engineering | August 2026 Report</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #222240;
+            --accent: #6c63ff;
+            --accent-glow: rgba(108, 99, 255, 0.3);
+            --accent-secondary: #00d4aa;
+            --text-primary: #e8e8f0;
+            --text-secondary: #9999b3;
+            --text-muted: #666680;
+            --border: #2a2a40;
+            --success: #00d4aa;
+            --warning: #ffb347;
+            --danger: #ff6b6b;
+        
+            --nav-bg: rgba(10,10,15,0.95);
+            --nav-bg-solid: rgba(10,10,15,0.98);
+            --nav-bg-bottom: rgba(10,10,15,0.97);
+}
+        /* === LIGHT THEME === */
+    html[data-theme="light"] {
+        --bg-primary: #f5f6fa;
+        --bg-secondary: #eceef4;
+        --bg-card: #ffffff;
+        --bg-card-hover: #f0f1f7;
+        --accent: #5b52e5;
+        --accent-glow: rgba(91, 82, 229, 0.25);
+        --accent-secondary: #00b894;
+        --text-primary: #1a1b25;
+        --text-secondary: #4a4d5e;
+        --text-muted: #8a8d9e;
+        --border: #dfe2ec;
+        --nav-bg: rgba(255,255,255,0.92);
+        --nav-bg-solid: rgba(255,255,255,0.98);
+        --nav-bg-bottom: rgba(255,255,255,0.97);
+        --success: #00b894;
+        --warning: #d97706;
+        --danger: #cf2b2b;
+    }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 2rem;
+        }
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+        nav .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+        nav .logo span { color: var(--text-muted); font-weight: 400; }
+        nav .nav-links { display: flex; gap: 0.25rem; }
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        nav .nav-links a:hover, nav .nav-links a.active {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        
+        /* === THEME TOGGLE === */
+        .theme-toggle {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+            background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+            font-size: 0.9rem; transition: all 0.25s; margin-left: 0.4rem; flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+        .theme-toggle .sun { display: none; }
+        html[data-theme="light"] .theme-toggle .moon { display: none; }
+        html[data-theme="light"] .theme-toggle .sun { display: inline; }
+        .nav-actions { display: flex; align-items: center; gap: 0.25rem; }
+        /* Burger Menu */
+        .burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1100; }
+        .burger span {
+            display: block; width: 22px; height: 2px; background: var(--text-primary);
+            margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+        }
+        .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.active span:nth-child(2) { opacity: 0; }
+        .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu {
+            display: none; position: fixed; top: 60px; left: 0; width: 100%;
+            background: var(--nav-bg-solid); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); z-index: 999;
+            padding: 1rem 2rem; flex-direction: column; gap: 0.25rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: var(--text-secondary); text-decoration: none;
+            padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem;
+            transition: all 0.2s; display: block;
+        }
+        .mobile-menu a:hover, .mobile-menu a.active { color: var(--text-primary); background: var(--bg-card); }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: var(--nav-bg-bottom); backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border); z-index: 1000;
+            display: flex; justify-content: space-around; align-items: center;
+            height: 64px; padding: 0 0.5rem; padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+        .bottom-nav a {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; color: var(--text-muted); font-size: 0.6rem;
+            gap: 3px; padding: 6px 12px; border-radius: 8px; transition: all 0.2s;
+            min-width: 56px; letter-spacing: 0.3px; text-transform: uppercase;
+        }
+        .bottom-nav a .bicon {
+            width: 22px; height: 22px; display: flex; align-items: center;
+            justify-content: center; font-size: 1rem; transition: all 0.2s;
+        }
+        .bottom-nav a:hover, .bottom-nav a.active { color: var(--accent); }
+        .bottom-nav a.active .bicon { filter: drop-shadow(0 0 8px var(--accent-glow)); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 2rem 4rem; padding-bottom: 120px; }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            nav .nav-links { display: none; }
+            .burger { display: block; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero .subtitle { font-size: 0.95rem; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .summary-grid { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 72px 1rem 2rem; padding-bottom: 120px; }
+            .hero { padding: 2rem 0 1.5rem; }
+            .hero h1 { font-size: 1.4rem; }
+            .hero .subtitle { font-size: 0.85rem; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+            .kpi-card { padding: 1.2rem; }
+            .kpi-card .kpi-number { font-size: 1.5rem; }
+            .tech-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+            .tech-item { font-size: 0.75rem; padding: 0.5rem; }
+            .tech-item .icon { width: 28px; height: 28px; font-size: 0.65rem; }
+            .cta-row { flex-direction: column; gap: 0.75rem; }
+            .cta-btn { text-align: center; }
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        .hero .badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            background: rgba(108, 99, 255, 0.15);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin: 3rem 0;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.25rem;
+        }
+
+        /* Section */
+        .section { margin: 3rem 0; }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-title .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .summary-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .summary-card .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+        .summary-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .summary-card .tag {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-infra { background: rgba(0, 212, 170, 0.15); color: var(--accent-secondary); }
+        .tag-frontend { background: rgba(108, 99, 255, 0.15); color: var(--accent); }
+        .tag-backend { background: rgba(255, 179, 71, 0.15); color: var(--warning); }
+        .tag-seo { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+        .tag-deploy { background: rgba(0, 180, 216, 0.15); color: #00b4d8; }
+        .summary-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .tech-item:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+        }
+        .tech-item .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* CTA */
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .cta-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+        .cta-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .cta-secondary:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .summary-grid { grid-template-columns: 1fr; }
+            nav .nav-links { gap: 0; }
+            nav .nav-links a { padding: 0.5rem 0.6rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="logo">Immanuel<span> / Skills</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#graphics">Graphics</a>
+            <a href="skills.html" class="active">Skills</a>
+            <a href="Certificates.html">Certificates</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme(event)" aria-label="Toggle theme" title="Toggle light/dark theme">
+                <span class="moon">&#9790;</span><span class="sun">&#9728;</span>
+            </button>
+            <button class="burger" onclick="toggleBurger()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#graphics">Graphics</a>
+    <a href="skills.html" class="active">Skills</a>
+    <a href="Certificates.html">Certificates</a>
+</div>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+    <a href="index.html"><span class="bicon">&#9673;</span>Home</a>
+    <a href="index.html#projects"><span class="bicon">&#9881;</span>Work</a>
+    <a href="skills.html" class="active"><span class="bicon">&#9733;</span>Skills</a>
+    <a href="Certificates.html"><span class="bicon">&#9655;</span>Certs</a>
+    <a href="Badges.html"><span class="bicon">&#9730;</span>Badges</a>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><span class="bicon">&#8593;</span>Top</a>
+</div>
+
+<div class="container">
+    <section class="hero">
+        <div class="badge">Monthly Engineering Report</div>
+        <h1>August <span class="gradient">2026</span></h1>
+        <p>Full-stack infrastructure, application development, and deployment operations across a multi-tenant SaaS ecosystem serving 50+ production domains.</p>
+    </section>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="number">25</div>
+            <div class="label">Active Dev Days</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">50+</div>
+            <div class="label">Domains Managed</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">194</div>
+            <div class="label">Max Files / Commit</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">7.7M</div>
+            <div class="label">Lines Deployed</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2 class="section-title"><span class="dot"></span> Executive Summary</h2>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Multi-Tenant Platform Engineering</h3>
+                    <span class="tag tag-infra">Infrastructure</span>
+                </div>
+                <p>Orchestrated full-stack deployment pipelines across 50+ production domains with automated SSH/SFTP transfer protocols, database migration management, and infrastructure-as-code deployment scripts. Implemented disaster recovery via comprehensive server archival (20 databases, 20 domains, ~7.7M LoC committed to VCS).</p>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Enterprise CMS Development</h3>
+                    <span class="tag tag-frontend">Frontend</span>
+                </div>
+                <p>Architected and deployed 10+ production-grade microsites with modular PHP component systems, responsive viewport-optimized layouts, real-time enquiry modals with UTM attribution tracking, and SEO-structured JSON-LD schema implementations across real-estate verticals.</p>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>DevOps &amp; CI/CD Automation</h3>
+                    <span class="tag tag-deploy">Deployment</span>
+                </div>
+                <p>Engineered custom deployment orchestration scripts (Python/Paramiko) for automated remote server provisioning, file synchronization, firewall rule verification, and zero-downtime deployments. Reduced manual deployment time by 70% through scriptable SSH pipelines.</p>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>SEO &amp; Performance Engineering</h3>
+                    <span class="tag tag-seo">Optimization</span>
+                </div>
+                <p>Generated 70+ SEO-optimized content entries with AIOSEO metadata analysis, implemented SERP ranking strategies across locality-targeted keyword clusters, built backlink architectures, and deployed schema.org markup for enhanced search visibility.</p>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Lead Capture &amp; CRM Integration</h3>
+                    <span class="tag tag-backend">Backend</span>
+                </div>
+                <p>Built and integrated end-to-end lead capture pipelines with AJAX form submissions, webhook-based lead routing, blacklist/throttle management, visitor analytics logging, and multi-channel notification systems (email + WhatsApp API triggers).</p>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Admin Dashboard &amp; CMS Panels</h3>
+                    <span class="tag tag-frontend">Frontend</span>
+                </div>
+                <p>Developed database-driven admin dashboards with CRUD operations, drag-and-drop media uploaders (8MB validation, MIME-type enforcement), idempotent schema migration scripts, and role-based access control for non-technical content managers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title"><span class="dot"></span> Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><div class="icon" style="background:rgba(108,99,255,0.2);color:var(--accent);">PHP</div> PHP 8.x</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,212,170,0.2);color:var(--accent-secondary);">JS</div> JavaScript ES6+</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,179,71,0.2);color:var(--warning);">PY</div> Python 3.11</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,107,107,0.2);color:var(--danger);">SQL</div> MariaDB 11.x</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,180,216,0.2);color:#00b4d8;">SSH</div> Paramiko SSH</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(108,99,255,0.2);color:var(--accent);">GIT</div> Git VCS</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,212,170,0.2);color:var(--accent-secondary);">NGX</div> Nginx/Apache</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,179,71,0.2);color:var(--warning);">WP</div> WordPress CMS</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,107,107,0.2);color:var(--danger);">API</div> RESTful APIs</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,180,216,0.2);color:#00b4d8;">SEO</div> Schema.org</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(108,99,255,0.2);color:var(--accent);">GTM</div> Google Tag Mgr</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,212,170,0.2);color:var(--accent-secondary);">CRON</div> Task Scheduling</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title"><span class="dot"></span> AI-Assisted Development Tools</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><div class="icon" style="background:rgba(217,119,6,0.2);color:#d97706;">CL</div> Claude Pro</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(16,163,127,0.2);color:#10a37f;">GP</div> GPT-4 Turbo</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(59,130,246,0.2);color:#3b82f6;">DS</div> DeepSeek V3</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(168,85,247,0.2);color:#a855f7;">CP</div> Copilot Pro</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(236,72,153,0.2);color:#ec4899;">PM</div> Perplexity AI</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(34,197,94,0.2);color:#22c55e;">AN</div> Anthropic API</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title"><span class="dot"></span> Marketing, SEO &amp; Social Platforms</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><div class="icon" style="background:rgba(0,212,170,0.2);color:#00b894;">CR</div> Leadrat CRM</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(59,130,246,0.2);color:#3b82f6;">GS</div> Google Sheets</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(239,68,68,0.2);color:#ef4444;">AH</div> Ahrefs</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(249,115,22,0.2);color:#f97316;">SM</div> Semrush</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,107,107,0.2);color:#ff6b6b;">AI</div> AISEO</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(168,85,247,0.2);color:#a855f7;">RM</div> Rank Math</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(217,119,6,0.2);color:#d97706;">EL</div> Elementor</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(236,72,153,0.2);color:#ec4899;">PB</div> Publer</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(34,197,94,0.2);color:#e25555;">PI</div> Pinterest</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(239,68,68,0.2);color:#ff0000;">YT</div> YouTube</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(239,68,68,0.2);color:#e1306c;">IG</div> Instagram</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(37,211,102,0.2);color:#0085ff;">BS</div> BlueSky</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(34,197,94,0.2);color:#12100e;">MD</div> Medium</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,107,107,0.2);color:#ff4500;">RD</div> Reddit</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(255,179,71,0.2);color:var(--warning);">1F</div> 1File (Reporting)</div>
+            <div class="tech-item"><div class="icon" style="background:rgba(0,212,170,0.2);color:var(--accent-secondary);">RSE</div> SRS/LS Admin</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title"><span class="dot"></span> Featured Engagements</h2>
+        <div class="summary-grid">
+            <a class="summary-card" href="index.html#projects" style="text-decoration:none;color:inherit;">
+                <div class="card-header">
+                    <h3>Leadrat CRM &amp; Meta Leads Integration</h3>
+                    <span class="tag tag-backend">Automation</span>
+                </div>
+                <p>Unified website + Meta PPC leads into a central CRM and auto-logged every enquiry to Google Sheets, giving sales a single source of truth and eliminating manual data entry.</p>
+            </a>
+            <a class="summary-card" href="index.html#projects" style="text-decoration:none;color:inherit;">
+                <div class="card-header">
+                    <h3>PPC Security Alert System</h3>
+                    <span class="tag" style="background:rgba(239,68,68,0.15);color:#ef4444;">Security</span>
+                </div>
+                <p>Detected attack &amp; spam traffic on PPC sites and automatically blocked repeat offenders across all future sites, measurably reducing the cost of paid leads.</p>
+            </a>
+            <a class="summary-card" href="index.html#projects" style="text-decoration:none;color:inherit;">
+                <div class="card-header">
+                    <h3>SEO Blog Writing &amp; Intern Training</h3>
+                    <span class="tag tag-seo">SEO</span>
+                </div>
+                <p>Authored fast-ranking SEO blogs and ran a hands-on training program covering WordPress, SEO plugins, property listings, Pinterest sourcing, Publer bulk scheduling, and multi-platform social distribution (YouTube, Instagram, BlueSky, Medium, Reddit).</p>
+            </a>
+        </div>
+    </section>
+
+    <div class="cta-row">
+        <a href="index.html#projects" class="cta-btn cta-primary">View Portfolio Projects &rarr;</a>
+        <a href="Certificates.html" class="cta-btn cta-secondary">My Certificates</a>
+    </div>
+
+    <footer>
+        <p>Full-Stack Engineering Report &mdash; August 2026 &mdash; Immanuel Fernandes</p>
+    </footer>
+</div>
+
+
+<script>
+function toggleBurger() {
+    document.querySelector('.burger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+    var burger = document.querySelector('.burger');
+    var menu = document.getElementById('mobileMenu');
+    if (!burger.contains(e.target) && !menu.contains(e.target)) {
+        burger.classList.remove('active');
+        menu.classList.remove('open');
+    }
+});
+function toggleTheme(e) {
+    if (e) e.stopPropagation();
+    var root = document.documentElement;
+    var isLight = root.getAttribute('data-theme') === 'light';
+    root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    localStorage.setItem('portfolio-skill-theme', isLight ? 'dark' : 'light');
+}
+(function initTheme() {
+    var saved = localStorage.getItem('portfolio-skill-theme');
+    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+})();
+</script>
+
+</body>
+</html>
